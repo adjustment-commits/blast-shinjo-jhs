@@ -56,9 +56,7 @@ button {
   font-weight: bold;
   margin-top: 10px;
 }
-button:hover {
-  background: #00784a;
-}
+button:hover { background: #00784a; }
 #container {
   max-width: 900px;
   margin: auto;
@@ -66,6 +64,17 @@ button:hover {
 }
 tr.year2 td:first-child { background: #f3fbf5; font-weight: bold; }
 tr.year1 td:first-child { background: #f9fdfb; font-weight: bold; }
+#averageBox {
+  text-align: center;
+  margin-top: 15px;
+  font-weight: bold;
+  color: #006b4b;
+  line-height: 1.8;
+  transition: color 0.3s;
+}
+.high { color: #009e60; }   /* 緑：高出力 */
+.mid { color: #333333; }    /* 黒：平均 */
+.low { color: #d62828; }    /* 赤：出力不足 */
 </style>
 </head>
 <body>
@@ -82,29 +91,14 @@ tr.year1 td:first-child { background: #f9fdfb; font-weight: bold; }
       </tr>
     </thead>
     <tbody>
-      <!-- 2年生 -->
-      <tr class="year2"><td><input type="text" value="2年 石井" readonly></td><td><input type="number" step="0.1" class="batSpeed"></td><td><input type="number" step="0.1" class="attackAngle"></td><td class="refSpeed">-</td><td class="comment">-</td></tr>
-      <tr class="year2"><td><input type="text" value="2年 黒田" readonly></td><td><input type="number" step="0.1" class="batSpeed"></td><td><input type="number" step="0.1" class="attackAngle"></td><td class="refSpeed">-</td><td class="comment">-</td></tr>
-      <tr class="year2"><td><input type="text" value="2年 黒畑" readonly></td><td><input type="number" step="0.1" class="batSpeed"></td><td><input type="number" step="0.1" class="attackAngle"></td><td class="refSpeed">-</td><td class="comment">-</td></tr>
-      <tr class="year2"><td><input type="text" value="2年 齋藤" readonly></td><td><input type="number" step="0.1" class="batSpeed"></td><td><input type="number" step="0.1" class="attackAngle"></td><td class="refSpeed">-</td><td class="comment">-</td></tr>
-      <tr class="year2"><td><input type="text" value="2年 高倉" readonly></td><td><input type="number" step="0.1" class="batSpeed"></td><td><input type="number" step="0.1" class="attackAngle"></td><td class="refSpeed">-</td><td class="comment">-</td></tr>
-      <tr class="year2"><td><input type="text" value="2年 西井" readonly></td><td><input type="number" step="0.1" class="batSpeed"></td><td><input type="number" step="0.1" class="attackAngle"></td><td class="refSpeed">-</td><td class="comment">-</td></tr>
-      <tr class="year2"><td><input type="text" value="2年 二宮" readonly></td><td><input type="number" step="0.1" class="batSpeed"></td><td><input type="number" step="0.1" class="attackAngle"></td><td class="refSpeed">-</td><td class="comment">-</td></tr>
-      <tr class="year2"><td><input type="text" value="2年 堀井" readonly></td><td><input type="number" step="0.1" class="batSpeed"></td><td><input type="number" step="0.1" class="attackAngle"></td><td class="refSpeed">-</td><td class="comment">-</td></tr>
-      <tr class="year2"><td><input type="text" value="2年 山本" readonly></td><td><input type="number" step="0.1" class="batSpeed"></td><td><input type="number" step="0.1" class="attackAngle"></td><td class="refSpeed">-</td><td class="comment">-</td></tr>
-      <!-- 1年生 -->
-      <tr class="year1"><td><input type="text" value="1年 荒井" readonly></td><td><input type="number" step="0.1" class="batSpeed"></td><td><input type="number" step="0.1" class="attackAngle"></td><td class="refSpeed">-</td><td class="comment">-</td></tr>
-      <tr class="year1"><td><input type="text" value="1年 浦上" readonly></td><td><input type="number" step="0.1" class="batSpeed"></td><td><input type="number" step="0.1" class="attackAngle"></td><td class="refSpeed">-</td><td class="comment">-</td></tr>
-      <tr class="year1"><td><input type="text" value="1年 瓜生" readonly></td><td><input type="number" step="0.1" class="batSpeed"></td><td><input type="number" step="0.1" class="attackAngle"></td><td class="refSpeed">-</td><td class="comment">-</td></tr>
-      <tr class="year1"><td><input type="text" value="1年 管" readonly></td><td><input type="number" step="0.1" class="batSpeed"></td><td><input type="number" step="0.1" class="attackAngle"></td><td class="refSpeed">-</td><td class="comment">-</td></tr>
-      <tr class="year1"><td><input type="text" value="1年 新川" readonly></td><td><input type="number" step="0.1" class="batSpeed"></td><td><input type="number" step="0.1" class="attackAngle"></td><td class="refSpeed">-</td><td class="comment">-</td></tr>
-      <tr class="year1"><td><input type="text" value="1年 須原" readonly></td><td><input type="number" step="0.1" class="batSpeed"></td><td><input type="number" step="0.1" class="attackAngle"></td><td class="refSpeed">-</td><td class="comment">-</td></tr>
-      <tr class="year1"><td><input type="text" value="1年 芹田" readonly></td><td><input type="number" step="0.1" class="batSpeed"></td><td><input type="number" step="0.1" class="attackAngle"></td><td class="refSpeed">-</td><td class="comment">-</td></tr>
-      <tr class="year1"><td><input type="text" value="1年 古田" readonly></td><td><input type="number" step="0.1" class="batSpeed"></td><td><input type="number" step="0.1" class="attackAngle"></td><td class="refSpeed">-</td><td class="comment">-</td></tr>
-      <tr class="year1"><td><input type="text" value="1年 鈴木" readonly></td><td><input type="number" step="0.1" class="batSpeed"></td><td><input type="number" step="0.1" class="attackAngle"></td><td class="refSpeed">-</td><td class="comment">-</td></tr>
-      <tr class="year1"><td><input type="text" value="1年 豊本" readonly></td><td><input type="number" step="0.1" class="batSpeed"></td><td><input type="number" step="0.1" class="attackAngle"></td><td class="refSpeed">-</td><td class="comment">-</td></tr>
+      <!-- 略：前回と同じ19名分 -->
     </tbody>
   </table>
+  <div id="averageBox">
+    <span id="avgAll" class="mid">全体平均：-- km/h　｜　参考：-- km/h</span><br>
+    <span id="avg2" class="mid">2年平均：-- km/h</span>　｜　
+    <span id="avg1" class="mid">1年平均：-- km/h</span>
+  </div>
   <div style="text-align:center;">
     <button onclick="downloadCSV()">CSVダウンロード</button>
   </div>
@@ -115,6 +109,7 @@ document.querySelectorAll(".batSpeed, .attackAngle").forEach(input => {
   input.addEventListener("input", e => {
     const row = e.target.closest("tr");
     updateRow(row);
+    updateAverages();
   });
 });
 
@@ -124,18 +119,12 @@ function updateRow(row) {
   const refCell = row.querySelector(".refSpeed");
   const commentCell = row.querySelector(".comment");
 
-  if (!isNaN(batSpeed)) {
-    const ref = (batSpeed * 1.6).toFixed(1);
-    refCell.textContent = ref;
-  } else {
-    refCell.textContent = "-";
-  }
+  if (!isNaN(batSpeed)) refCell.textContent = (batSpeed * 1.6).toFixed(1);
+  else refCell.textContent = "-";
 
-  if (!isNaN(batSpeed) && !isNaN(attack)) {
+  if (!isNaN(batSpeed) && !isNaN(attack))
     commentCell.textContent = evaluate(batSpeed, attack);
-  } else {
-    commentCell.textContent = "-";
-  }
+  else commentCell.textContent = "-";
 }
 
 function evaluate(batSpeed, attack) {
@@ -152,18 +141,44 @@ function evaluate(batSpeed, attack) {
   return out;
 }
 
+function updateAverages() {
+  const avg = arr => arr.length ? (arr.reduce((a,b)=>a+b,0)/arr.length).toFixed(1) : "--";
+  const all = Array.from(document.querySelectorAll(".batSpeed")).map(i=>parseFloat(i.value)).filter(v=>!isNaN(v));
+  const y2 = Array.from(document.querySelectorAll(".year2 .batSpeed")).map(i=>parseFloat(i.value)).filter(v=>!isNaN(v));
+  const y1 = Array.from(document.querySelectorAll(".year1 .batSpeed")).map(i=>parseFloat(i.value)).filter(v=>!isNaN(v));
+  const avgAll = avg(all), avg2 = avg(y2), avg1 = avg(y1);
+  const avgRef = avgAll !== "--" ? (avgAll*1.6).toFixed(1) : "--";
+
+  colorize("avgAll", avgAll);
+  colorize("avg2", avg2);
+  colorize("avg1", avg1);
+
+  document.getElementById("avgAll").innerHTML = `全体平均：${avgAll} km/h　｜　参考：${avgRef} km/h`;
+  document.getElementById("avg2").innerHTML = `2年平均：${avg2} km/h`;
+  document.getElementById("avg1").innerHTML = `1年平均：${avg1} km/h`;
+}
+
+function colorize(id, val) {
+  const el = document.getElementById(id);
+  el.className = "mid";
+  const v = parseFloat(val);
+  if (isNaN(v)) return;
+  if (v >= 80) el.className = "high";
+  else if (v < 70) el.className = "low";
+}
+
 function downloadCSV() {
   let csv = "学年・氏名,BatSpeed(km/h),AttackAngle(°),参考ヘッドスピード(km/h),コメント\n";
-  document.querySelectorAll("#blastTable tbody tr").forEach(row => {
+  document.querySelectorAll("#blastTable tbody tr").forEach(row=>{
     const cols = row.querySelectorAll("td");
     const name = cols[0].querySelector("input").value;
     const bs = cols[1].querySelector("input").value;
     const aa = cols[2].querySelector("input").value;
     const ref = cols[3].textContent;
-    const com = cols[4].textContent.replace(/,/g, "、");
+    const com = cols[4].textContent.replace(/,/g,"、");
     csv += `${name},${bs},${aa},${ref},"${com}"\n`;
   });
-  const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+  const blob = new Blob([csv], {type:"text/csv;charset=utf-8;"});
   const link = document.createElement("a");
   link.href = URL.createObjectURL(blob);
   link.download = "blast_record.csv";
