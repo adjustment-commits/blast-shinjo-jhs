@@ -64,6 +64,8 @@ button:hover {
   margin: auto;
   overflow-x: hidden;
 }
+tr.year2 td:first-child { background: #f3fbf5; font-weight: bold; }
+tr.year1 td:first-child { background: #f9fdfb; font-weight: bold; }
 </style>
 </head>
 <body>
@@ -72,7 +74,7 @@ button:hover {
   <table id="blastTable">
     <thead>
       <tr>
-        <th>選手名</th>
+        <th>学年・氏名</th>
         <th>Bat Speed<br>(km/h)</th>
         <th>Attack Angle<br>(°)</th>
         <th>参考ヘッドスピード<br>(推定値 km/h)</th>
@@ -80,8 +82,27 @@ button:hover {
       </tr>
     </thead>
     <tbody>
-      <!-- 19名分固定行 -->
-      <!-- JSで自動生成 -->
+      <!-- 2年生 -->
+      <tr class="year2"><td><input type="text" value="2年 石井" readonly></td><td><input type="number" step="0.1" class="batSpeed"></td><td><input type="number" step="0.1" class="attackAngle"></td><td class="refSpeed">-</td><td class="comment">-</td></tr>
+      <tr class="year2"><td><input type="text" value="2年 黒田" readonly></td><td><input type="number" step="0.1" class="batSpeed"></td><td><input type="number" step="0.1" class="attackAngle"></td><td class="refSpeed">-</td><td class="comment">-</td></tr>
+      <tr class="year2"><td><input type="text" value="2年 黒畑" readonly></td><td><input type="number" step="0.1" class="batSpeed"></td><td><input type="number" step="0.1" class="attackAngle"></td><td class="refSpeed">-</td><td class="comment">-</td></tr>
+      <tr class="year2"><td><input type="text" value="2年 齋藤" readonly></td><td><input type="number" step="0.1" class="batSpeed"></td><td><input type="number" step="0.1" class="attackAngle"></td><td class="refSpeed">-</td><td class="comment">-</td></tr>
+      <tr class="year2"><td><input type="text" value="2年 高倉" readonly></td><td><input type="number" step="0.1" class="batSpeed"></td><td><input type="number" step="0.1" class="attackAngle"></td><td class="refSpeed">-</td><td class="comment">-</td></tr>
+      <tr class="year2"><td><input type="text" value="2年 西井" readonly></td><td><input type="number" step="0.1" class="batSpeed"></td><td><input type="number" step="0.1" class="attackAngle"></td><td class="refSpeed">-</td><td class="comment">-</td></tr>
+      <tr class="year2"><td><input type="text" value="2年 二宮" readonly></td><td><input type="number" step="0.1" class="batSpeed"></td><td><input type="number" step="0.1" class="attackAngle"></td><td class="refSpeed">-</td><td class="comment">-</td></tr>
+      <tr class="year2"><td><input type="text" value="2年 堀井" readonly></td><td><input type="number" step="0.1" class="batSpeed"></td><td><input type="number" step="0.1" class="attackAngle"></td><td class="refSpeed">-</td><td class="comment">-</td></tr>
+      <tr class="year2"><td><input type="text" value="2年 山本" readonly></td><td><input type="number" step="0.1" class="batSpeed"></td><td><input type="number" step="0.1" class="attackAngle"></td><td class="refSpeed">-</td><td class="comment">-</td></tr>
+      <!-- 1年生 -->
+      <tr class="year1"><td><input type="text" value="1年 荒井" readonly></td><td><input type="number" step="0.1" class="batSpeed"></td><td><input type="number" step="0.1" class="attackAngle"></td><td class="refSpeed">-</td><td class="comment">-</td></tr>
+      <tr class="year1"><td><input type="text" value="1年 浦上" readonly></td><td><input type="number" step="0.1" class="batSpeed"></td><td><input type="number" step="0.1" class="attackAngle"></td><td class="refSpeed">-</td><td class="comment">-</td></tr>
+      <tr class="year1"><td><input type="text" value="1年 瓜生" readonly></td><td><input type="number" step="0.1" class="batSpeed"></td><td><input type="number" step="0.1" class="attackAngle"></td><td class="refSpeed">-</td><td class="comment">-</td></tr>
+      <tr class="year1"><td><input type="text" value="1年 管" readonly></td><td><input type="number" step="0.1" class="batSpeed"></td><td><input type="number" step="0.1" class="attackAngle"></td><td class="refSpeed">-</td><td class="comment">-</td></tr>
+      <tr class="year1"><td><input type="text" value="1年 新川" readonly></td><td><input type="number" step="0.1" class="batSpeed"></td><td><input type="number" step="0.1" class="attackAngle"></td><td class="refSpeed">-</td><td class="comment">-</td></tr>
+      <tr class="year1"><td><input type="text" value="1年 須原" readonly></td><td><input type="number" step="0.1" class="batSpeed"></td><td><input type="number" step="0.1" class="attackAngle"></td><td class="refSpeed">-</td><td class="comment">-</td></tr>
+      <tr class="year1"><td><input type="text" value="1年 芹田" readonly></td><td><input type="number" step="0.1" class="batSpeed"></td><td><input type="number" step="0.1" class="attackAngle"></td><td class="refSpeed">-</td><td class="comment">-</td></tr>
+      <tr class="year1"><td><input type="text" value="1年 古田" readonly></td><td><input type="number" step="0.1" class="batSpeed"></td><td><input type="number" step="0.1" class="attackAngle"></td><td class="refSpeed">-</td><td class="comment">-</td></tr>
+      <tr class="year1"><td><input type="text" value="1年 鈴木" readonly></td><td><input type="number" step="0.1" class="batSpeed"></td><td><input type="number" step="0.1" class="attackAngle"></td><td class="refSpeed">-</td><td class="comment">-</td></tr>
+      <tr class="year1"><td><input type="text" value="1年 豊本" readonly></td><td><input type="number" step="0.1" class="batSpeed"></td><td><input type="number" step="0.1" class="attackAngle"></td><td class="refSpeed">-</td><td class="comment">-</td></tr>
     </tbody>
   </table>
   <div style="text-align:center;">
@@ -90,27 +111,6 @@ button:hover {
 </div>
 
 <script>
-const playerNames = [
-  "2年-1","2年-2","2年-3","2年-4","2年-5","2年-6","2年-7","2年-8","2年-9",
-  "1年-1","1年-2","1年-3","1年-4","1年-5","1年-6","1年-7","1年-8","1年-9","1年-10"
-];
-
-const tbody = document.querySelector("#blastTable tbody");
-
-// 19行生成
-playerNames.forEach(name => {
-  const tr = document.createElement("tr");
-  tr.innerHTML = `
-    <td><input type="text" value="${name}"></td>
-    <td><input type="number" step="0.1" class="batSpeed"></td>
-    <td><input type="number" step="0.1" class="attackAngle"></td>
-    <td class="refSpeed">-</td>
-    <td class="comment">-</td>
-  `;
-  tbody.appendChild(tr);
-});
-
-// イベント登録
 document.querySelectorAll(".batSpeed, .attackAngle").forEach(input => {
   input.addEventListener("input", e => {
     const row = e.target.closest("tr");
@@ -140,13 +140,11 @@ function updateRow(row) {
 
 function evaluate(batSpeed, attack) {
   let out = "";
-  // Bat Speed
   if (batSpeed < 60) out += "出力不足（下半身の連動強化が必要）";
   else if (batSpeed <= 70) out += "平均的（スイング順序とタイミングを整える段階）";
   else if (batSpeed <= 80) out += "良好（出力が安定。角度制御と再現性を重視）";
   else out += "高出力（角度とのバランスとコンタクト精度を磨く）";
   out += " ／ ";
-  // Attack Angle
   if (attack < 0) out += "ダウン傾向（下半身主導の不足または早開き）";
   else if (attack <= 12) out += "理想的（ミート率・打球効率良好）";
   else if (attack <= 18) out += "強打者型（長打志向。出力とのバランス要確認）";
@@ -155,7 +153,7 @@ function evaluate(batSpeed, attack) {
 }
 
 function downloadCSV() {
-  let csv = "選手名,BatSpeed(km/h),AttackAngle(°),参考ヘッドスピード(km/h),コメント\n";
+  let csv = "学年・氏名,BatSpeed(km/h),AttackAngle(°),参考ヘッドスピード(km/h),コメント\n";
   document.querySelectorAll("#blastTable tbody tr").forEach(row => {
     const cols = row.querySelectorAll("td");
     const name = cols[0].querySelector("input").value;
