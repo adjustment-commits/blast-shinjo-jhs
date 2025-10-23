@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BLASTスイング記録｜中学校野球部</title>
+<style>
+body {
+  font-family: "Noto Sans JP", sans-serif;
+  background: #fff;
+  color: #222;
+  margin: 0;
+  padding: 10px;
+}
+h1 {
+  text-align: center;
+  color: #009e60;
+  margin: 10px 0 20px;
+  font-size: 1.4rem;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+th, td {
+  border: 1px solid #ccc;
+  padding: 6px;
+  text-align: center;
+}
+th {
+  background: #e8f5e9;
+  color: #006b4b;
+  position: sticky;
+  top: 0;
+}
+input {
+  width: 90%;
+  padding: 4px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}
+.comment {
+  font-size: 0.8rem;
+  text-align: left;
+}
+button {
+  background: #009e60;
+  color: #fff;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 10px;
+}
+button:hover {
+  background: #00784a;
+}
+#container {
+  max-width: 900px;
+  margin: auto;
+  overflow-x: hidden;
+}
+</style>
+</head>
+<body>
+<div id="container">
+  <h1>BLASTスイング記録（中学校野球部）</h1>
+  <table id="blastTable">
+    <thead>
+      <tr>
+        <th>選手名</th>
+        <th>Bat Speed<br>(km/h)</th>
+        <th>Attack Angle<br>(°)</th>
+        <th>参考ヘッドスピード<br>(推定値 km/h)</th>
+        <th>コメント</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- 19名分固定行 -->
+      <!-- JSで自動生成 -->
+    </tbody>
+  </table>
+  <div style="text-align:center;">
+    <button onclick="downloadCSV()">CSVダウンロード</button>
+  </div>
+</div>
+
+<script>
+const playerNames = [
+  "2年-1","2年-2","2年-3","2年-4","2年-5","2年-6","2年-7","2年-8","2年-9",
+  "1年-1","1年-2","1年-3","1年-4","1年-5","1年-6","1年-7","1年-8","1年-9","1年-10"
+];
+
+const tbody = document.querySelector("#blastTable tbody");
+
+// 19行生成
+playerNames.forEach(name => {
+  const tr = document.createElement("tr");
+  tr.innerHTML = `
+    <td><input type="text" value="${name}"></td>
+    <td><input type="number" step="0.1" class="batSpeed"></td>
+    <td><input type="number" step="0.1" class="attackAngle"></td>
+    <td class="refSpeed">-</td>
+    <td class="comment">-</td>
+  `;
+  tbody.appendChild(tr);
+});
+
+// イベント登録
+document.querySelectorAll(".batSpeed, .attackAngle").forEach(input => {
+  input.addEventListener("input", e => {
+    const row = e.target.closest("tr");
+    updateRow(row);
+  });
+});
+
+function updateRow(row) {
+  const batSpeed = parseFloat(row.querySelector(".batSpeed").value);
+  const attack = parseFloat(row.querySelector(".attackAngle").value);
+  const refCell = row.querySelector(".refSpeed");
+  const commentCell = row.querySelector(".comment");
+
+  if (!isNaN(batSpeed)) {
+    const ref = (batSpeed * 1.6).toFixed(1);
+    refCell.textContent = ref;
+  } else {
+    refCell.textContent = "-";
+  }
+
+  if (!isNaN(batSpeed) && !isNaN(attack)) {
+    commentCell.textContent = evaluate(batSpeed, attack);
+  } else {
+    commentCell.textContent = "-";
+  }
+}
+
+function evaluate(batSpeed, attack) {
+  let out = "";
+  // Bat Speed
+  if (batSpeed < 60) out += "出力不足（下半身の連動強化が必要）";
+  else if (batSpeed <= 70) out += "平均的（スイング順序とタイミングを整える段階）";
+  else if (batSpeed <= 80) out += "良好（出力が安定。角度制御と再現性を重視）";
+  else out += "高出力（角度とのバランスとコンタクト精度を磨く）";
+  out += " ／ ";
+  // Attack Angle
+  if (attack < 0) out += "ダウン傾向（下半身主導の不足または早開き）";
+  else if (attack <= 12) out += "理想的（ミート率・打球効率良好）";
+  else if (attack <= 18) out += "強打者型（長打志向。出力とのバランス要確認）";
+  else out += "アッパー傾向（リリース遅れまたは上体主導）";
+  return out;
+}
+
+function downloadCSV() {
+  let csv = "選手名,BatSpeed(km/h),AttackAngle(°),参考ヘッドスピード(km/h),コメント\n";
+  document.querySelectorAll("#blastTable tbody tr").forEach(row => {
+    const cols = row.querySelectorAll("td");
+    const name = cols[0].querySelector("input").value;
+    const bs = cols[1].querySelector("input").value;
+    const aa = cols[2].querySelector("input").value;
+    const ref = cols[3].textContent;
+    const com = cols[4].textContent.replace(/,/g, "、");
+    csv += `${name},${bs},${aa},${ref},"${com}"\n`;
+  });
+  const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = "blast_record.csv";
+  link.click();
+}
+</script>
+</body>
+</html>
