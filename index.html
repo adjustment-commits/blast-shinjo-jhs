@@ -181,7 +181,7 @@ function updateAverages() {
   const y2 = Array.from(document.querySelectorAll(".year2 .batSpeed")).map(i=>parseFloat(i.value)).filter(v=>!isNaN(v));
   const y1 = Array.from(document.querySelectorAll(".year1 .batSpeed")).map(i=>parseFloat(i.value)).filter(v=>!isNaN(v));
   const avgAll = avg(all), avg2 = avg(y2), avg1 = avg(y1);
-  const avgRef = avgAll !== "--" ? (avgAll*1.6).toFixed(1) : "--";
+  const avgRef = avgAll !== "--" ? (avgAll*1.2).toFixed(1) : "--";
 
   colorize("avgAll", avgAll);
   colorize("avg2", avg2);
