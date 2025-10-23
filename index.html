@@ -72,14 +72,22 @@ tr.year1 td:first-child { background: #f9fdfb; font-weight: bold; }
   line-height: 1.8;
   transition: color 0.3s;
 }
-.high { color: #009e60; }   /* 緑：高出力 */
-.mid { color: #333333; }    /* 黒：平均 */
-.low { color: #d62828; }    /* 赤：出力不足 */
+.high { color: #009e60; }
+.mid { color: #333333; }
+.low { color: #d62828; }
+#chart {
+  margin: 20px auto;
+  display: block;
+  width: 90%;
+  max-width: 400px;
+  height: 200px;
+}
 </style>
 </head>
 <body>
 <div id="container">
   <h1>BLASTスイング記録（中学校野球部）</h1>
+
   <table id="blastTable">
     <thead>
       <tr>
@@ -91,20 +99,26 @@ tr.year1 td:first-child { background: #f9fdfb; font-weight: bold; }
       </tr>
     </thead>
     <tbody>
-      <!-- 略：前回と同じ19名分 -->
+      <!-- 19名分（省略可：前回のまま） -->
     </tbody>
   </table>
+
   <div id="averageBox">
     <span id="avgAll" class="mid">全体平均：-- km/h　｜　参考：-- km/h</span><br>
     <span id="avg2" class="mid">2年平均：-- km/h</span>　｜　
     <span id="avg1" class="mid">1年平均：-- km/h</span>
   </div>
+
+  <canvas id="chart"></canvas>
+
   <div style="text-align:center;">
     <button onclick="downloadCSV()">CSVダウンロード</button>
   </div>
 </div>
 
 <script>
+const ctx = document.getElementById("chart").getContext("2d");
+
 document.querySelectorAll(".batSpeed, .attackAngle").forEach(input => {
   input.addEventListener("input", e => {
     const row = e.target.closest("tr");
@@ -156,6 +170,8 @@ function updateAverages() {
   document.getElementById("avgAll").innerHTML = `全体平均：${avgAll} km/h　｜　参考：${avgRef} km/h`;
   document.getElementById("avg2").innerHTML = `2年平均：${avg2} km/h`;
   document.getElementById("avg1").innerHTML = `1年平均：${avg1} km/h`;
+
+  drawChart(avgAll, avg2, avg1);
 }
 
 function colorize(id, val) {
@@ -165,6 +181,30 @@ function colorize(id, val) {
   if (isNaN(v)) return;
   if (v >= 80) el.className = "high";
   else if (v < 70) el.className = "low";
+}
+
+function drawChart(all, y2, y1) {
+  const values = [parseFloat(y2) || 0, parseFloat(y1) || 0, parseFloat(all) || 0];
+  const labels = ["2年", "1年", "全体"];
+  const colors = values.map(v => v >= 80 ? "#009e60" : v >= 70 ? "#333" : "#d62828");
+  const maxVal = Math.max(...values, 100);
+
+  ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+  const width = ctx.canvas.width / 5;
+  const scale = (ctx.canvas.height - 30) / maxVal;
+
+  values.forEach((v, i) => {
+    const barHeight = v * scale;
+    const x = (i + 1) * width;
+    const y = ctx.canvas.height - barHeight - 10;
+    ctx.fillStyle = colors[i];
+    ctx.fillRect(x, y, width / 2, barHeight);
+    ctx.fillStyle = "#000";
+    ctx.textAlign = "center";
+    ctx.font = "14px sans-serif";
+    ctx.fillText(labels[i], x + width / 4, ctx.canvas.height - 2);
+    if (v > 0) ctx.fillText(v.toFixed(1), x + width / 4, y - 5);
+  });
 }
 
 function downloadCSV() {
