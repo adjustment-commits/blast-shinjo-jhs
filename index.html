@@ -99,6 +99,9 @@ tr.year1 td:first-child { background: #f9fdfb; font-weight: bold; }
   max-width: 420px;
   height: 200px;
 }
+
+td.comment { word-break: keep-all; line-height: 1.6; }
+  
 </style>
 </head>
 
@@ -184,33 +187,34 @@ function updateRow(row) {
 }
 
 function evaluate(batSpeed, attack, ttc) {
-  let out = "";
+  let comment = "";
 
-  // Bat Speed
-  if (batSpeed < 65) out += "出力不足（下半身と体幹の連動が弱く、打球初速が上がりにくい）";
-  else if (batSpeed < 75) out += "平均以下（スイング速度はあるが、力をボールに伝え切れていない）";
-  else if (batSpeed < 85) out += "平均的（動作の再現性とタイミング精度を高めたい）";
-  else out += "上位水準（出力は十分。角度とコンタクト精度を安定させたい）";
-
-  out += " ／ ";
-
-  // Attack Angle
-  if (attack < -3) out += "極端なダウン軌道（インパクトロスが大きい）";
-  else if (attack < 5) out += "ややダウン傾向（下方向への力が強く、ロスが出ている）";
-  else if (attack <= 12) out += "理想範囲（効率的な軌道。動作の再現性を維持したい）";
-  else if (attack <= 18) out += "ややアッパー（強打志向。下半身主導の維持が課題）";
-  else out += "過度なアッパー（上体主導。再現性が低下している）";
-
-  // Time to Contact
-  if (!isNaN(ttc)) {
-    out += " ／ ";
-    if (ttc > 0.18) out += "始動が遅く、出力伝達に時間を要している";
-    else if (ttc > 0.16) out += "平均的。動作順序の安定が課題";
-    else if (ttc > 0.14) out += "反応速度は良好。出力方向との一致を高めたい";
-    else out += "反応は速い。動作精度を維持できるかが鍵";
+  // --- 出力・角度・反応を統合して評価 ---
+  if (batSpeed < 65) {
+    comment = "まだ力の伝わり方が小さいけど、しっかり振ろうとする意識は良い。下半身の使い方を覚えるともっと伸びる。";
+  } 
+  else if (batSpeed < 75) {
+    if (attack < 0) comment = "力は出てきているけど、スイングが少し下に向きやすい。股関節からスムーズに回れると打球が強くなる。";
+    else if (attack > 15) comment = "よく振れているが、少し上に抜けやすい。体の回し方とリズムを合わせるともっと当たる。";
+    else comment = "振り切れていてバランスも悪くない。タイミングを合わせる練習で安定してくる。";
+  } 
+  else if (batSpeed < 85) {
+    if (ttc > 0.17) comment = "出力は十分。あとは始動を早くして、ボールに合わせる感覚を磨こう。";
+    else comment = "力・角度・反応のバランスが良く、形になってきている。この感覚を続けよう。";
+  } 
+  else {
+    if (attack > 18) comment = "振る力はとても強い。上半身に頼らず、下半身から動く意識でさらに安定する。";
+    else comment = "全体の動きがまとまってきている。今後はボールへの反応スピードを高めよう。";
   }
 
-  return out;
+  // --- フィジカル課題（補足コメント） ---
+  if (batSpeed < 70) comment += "／フィジカル：股関節と体幹の連動を強くするトレーニングを意識。";
+  else if (attack < 0) comment += "／フィジカル：体の回し方を滑らかにする柔軟性を高めよう。";
+  else if (attack > 15) comment += "／フィジカル：胸と背中の動きを広げるストレッチを取り入れよう。";
+  else if (ttc > 0.17) comment += "／フィジカル：反応を速くするリズム系トレーニングがおすすめ。";
+  else comment += "／フィジカル：今の動きを安定して出せる体幹の強さを保とう。";
+
+  return comment;
 }
 
 function updateAverages() {
